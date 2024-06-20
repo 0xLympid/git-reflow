@@ -14,7 +14,7 @@ case $choice in
     1) branch_type="feature";;
     2) branch_type="fix";;
     3) branch_type="hotfix";;
-    4) branch  extension="enhancement";;
+    3) branch_type="enhancement";;
     5) branch_type="docs";;
     *) echo -e "Invalid choice"; exit 1;;
 esac
