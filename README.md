@@ -1,4 +1,3 @@
-
 # Git Reflow
 
 A tool to streamline the creation of Git branches from the `develop` branch with predefined types.
@@ -8,6 +7,7 @@ A tool to streamline the creation of Git branches from the `develop` branch with
 To install Git Reflow, follow these simple steps:
 
 1. Clone the repository to your local machine:
+
    ```
    git clone <repository-url>
    cd git-reflow
@@ -21,9 +21,11 @@ To install Git Reflow, follow these simple steps:
 ## Usage
 
 After installation, you can create a new branch by running:
+
 ```
 git-reflow
 ```
+
 Follow the prompts to select a branch type and describe your branch.
 
 ## Supported Branch Types
@@ -32,3 +34,4 @@ Follow the prompts to select a branch type and describe your branch.
 - `fix`: For bug fixes.
 - `hotfix`: For urgent fixes.
 - `enhancement`: For enhancements.
+- `epic`: For large-scale developments that encompass multiple features.
