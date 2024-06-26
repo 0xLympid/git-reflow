@@ -3,13 +3,13 @@
 git checkout develop
 git pull
 
-echo -e "${YELLOW}Select the type of branch you want to create:"
+echo -e "Select the type of branch you want to create:"
 echo -e "1) feature"
 echo -e "2) fix"
 echo -e "3) hotfix"
 echo -e "4) enhancement"
 echo -e "5) epic"
-read -p "Enter your choice (1-4): " choice
+read -p "Enter your choice (1-5): " choice
 
 case $choice in
     1) branch_type="feature";;
@@ -21,6 +21,12 @@ case $choice in
 esac
 
 read -p "Enter the branch description: " description
-branch_name="${branch_type}/$(echo $description | tr ' ' '-')"
+read -p "Enter the GitHub issue number (press Enter to skip): " issue_number
+
+if [ -z "$issue_number" ]; then
+    branch_name="${branch_type}/$(echo $description | tr ' ' '-')"
+else
+    branch_name="${branch_type}/$(echo $description | tr ' ' '-')-${issue_number}"
+fi
 
 git checkout -b $branch_name
