@@ -9,6 +9,7 @@ echo -e "2) fix"
 echo -e "3) hotfix"
 echo -e "4) enhancement"
 echo -e "5) epic"
+echo -e "6) tests"
 read -p "Enter your choice (1-5): " choice
 
 case $choice in
@@ -17,6 +18,7 @@ case $choice in
     3) branch_type="hotfix";;
     4) branch_type="enhancement";;
     5) branch_type="epic";;
+    6) branch_type="tests";;
     *) echo -e "Invalid choice"; exit 1;;
 esac
 

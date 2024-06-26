@@ -35,3 +35,4 @@ Follow the prompts to select a branch type and describe your branch.
 - `hotfix`: For urgent fixes.
 - `enhancement`: For enhancements.
 - `epic`: For large-scale developments that encompass multiple features.
+- `tests`: For new tests.
