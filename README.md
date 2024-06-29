@@ -36,3 +36,24 @@ Follow the prompts to select a branch type and describe your branch.
 - `enhancement`: For enhancements.
 - `epic`: For large-scale developments that encompass multiple features.
 - `tests`: For new tests.
+- `docs`: For improvements or additions to documentation.
+
+## Example
+
+1. Run the command to start the script:
+
+   ```bash
+   git-reflow
+   ```
+
+2. Select the type of branch you want to create by entering the corresponding number (1-7).
+
+3. Enter a brief description of the branch.
+
+4. Optionally, enter the GitHub issue number associated with this branch.
+
+The script will automatically create and checkout a new branch based on your inputs.
+
+## License
+
+This project is licensed under the MIT License.
