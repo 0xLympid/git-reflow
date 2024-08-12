@@ -11,7 +11,7 @@ echo -e "4) enhancement"
 echo -e "5) epic"
 echo -e "6) tests"
 echo -e "7) docs"
-read -p "Enter your choice (1-5): " choice
+read -p "Enter your choice (1-7): " choice
 
 case $choice in
     1) branch_type="feature";;
@@ -24,7 +24,12 @@ case $choice in
     *) echo -e "Invalid choice"; exit 1;;
 esac
 
-read -p "Enter the branch description: " description
+read -p "Enter the branch description (max 5 words): " description
+
+# Limit description to 5 words, convert to lowercase, and remove special characters/numbers
+description=$(echo $description | tr ' ' '\n' | head -n 5 | tr '\n' ' ' | tr -d '[:punct:][:digit:]' | tr '[:upper:]' '[:lower:]')
+description=$(echo $description | sed 's/[ ]*$//')
+
 read -p "Enter the GitHub issue number (press Enter to skip): " issue_number
 
 if [ -z "$issue_number" ]; then
