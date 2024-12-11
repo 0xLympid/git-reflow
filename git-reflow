@@ -1,8 +1,16 @@
 #!/bin/bash
 
-git checkout develop
-git pull
+# Function to display an error message and exit
+function error_exit {
+  echo "$1" 1>&2
+  exit 1
+}
 
+# Checkout the develop branch and pull the latest changes
+git checkout develop || error_exit "Failed to checkout 'develop' branch."
+git pull || error_exit "Failed to pull the latest changes."
+
+# Prompt user for branch type
 echo -e "Select the type of branch you want to create:"
 echo -e "1) feature"
 echo -e "2) fix"
@@ -13,29 +21,36 @@ echo -e "6) tests"
 echo -e "7) docs"
 read -p "Enter your choice (1-7): " choice
 
+# Determine branch type based on user input
 case $choice in
-    1) branch_type="feature";;
-    2) branch_type="fix";;
-    3) branch_type="hotfix";;
-    4) branch_type="enhancement";;
-    5) branch_type="epic";;
-    6) branch_type="tests";;
-    7) branch_type="docs";;
-    *) echo -e "Invalid choice"; exit 1;;
+  1) branch_type="feature";;
+  2) branch_type="fix";;
+  3) branch_type="hotfix";;
+  4) branch_type="enhancement";;
+  5) branch_type="epic";;
+  6) branch_type="tests";;
+  7) branch_type="docs";;
+  *) error_exit "Invalid choice. Please enter a number between 1 and 7.";;
 esac
 
+# Prompt user for branch description
 read -p "Enter the branch description (max 5 words): " description
 
-# Limit description to 5 words, convert to lowercase, and remove special characters/numbers
-description=$(echo $description | tr ' ' '\n' | head -n 5 | tr '\n' ' ' | tr -d '[:punct:][:digit:]' | tr '[:upper:]' '[:lower:]')
-description=$(echo $description | sed 's/[ ]*$//')
+# Validate and format the branch description
+description=$(echo "$description" | tr ' ' '\n' | head -n 5 | tr '\n' ' ' | tr -d '[:punct:][:digit:]' | tr '[:upper:]' '[:lower:]')
+description=$(echo "$description" | sed 's/[ ]*$//')
 
+# Prompt user for GitHub issue number
 read -p "Enter the GitHub issue number (press Enter to skip): " issue_number
 
+# Construct the branch name
 if [ -z "$issue_number" ]; then
-    branch_name="${branch_type}/$(echo $description | tr ' ' '-')"
+  branch_name="${branch_type}/$(echo "$description" | tr ' ' '-')"
 else
-    branch_name="${branch_type}/$(echo $description | tr ' ' '-')-${issue_number}"
+  branch_name="${branch_type}/$(echo "$description" | tr ' ' '-')-${issue_number}"
 fi
 
-git checkout -b $branch_name
+# Create and checkout the new branch
+git checkout -b "$branch_name" || error_exit "Failed to create and checkout branch '$branch_name'."
+
+echo "Branch '$branch_name' created and checked out successfully."
